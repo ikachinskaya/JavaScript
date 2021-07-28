@@ -1,55 +1,44 @@
 //==================================================================
-const cat1 = {
-	name: "Оболтус",
-	breed: "Сиамский",
-	age: 5,
-	color: "серый",
-	isMale: true,
-	sleep: function () {
-		return "ZZZ...";
-	},
-};
-
-const cat2 = {
-	name: "Арнольд",
-	breed: "Шотландский вислоухий",
-	age: 2,
-	color: "серый",
-	isMale: false,
-	sleep: function () {
-		return "ZZZ...";
-	},
-};
-
-const cat3 = {
-	name: "Васька",
-	breed: "Дворовой",
-	age: 5,
-	color: "серый",
-	isMale: true,
-	sleep: function () {
-		return "ZZZ...";
-	},
-};
-
-// Функция-конструктор котов
-function Cat(name, breed, age, color, isMale) {
-	this.name = name;
-	this.breed = breed;
+function User(firstName, lastName, age, isMale) {
+	this.firstName = firstName;
+	this.lastName = lastName;
+	this.fullName = `${firstName} ${lastName}`;
 	this.age = age;
-	this.color = color;
 	this.isMale = isMale;
 
-	this.sleep = function () {
-		return "ZZZZZZ....";
-	};
-
-	this.run = function () {
-		return "Tgdim....tgdim....";
+	this.startMoney = this.startMoney;
+	this.IBAN = function (endMoney) {
+		return (this.startMoney += endMoney);
 	};
 }
 
-//new говорит return this
-const cat1 = new Cat("Marsik", "Dvor", 9, "grey", true);
-console.log(cat1);
-console.log(cat1.run());
+const user1 = new User("Bill", "Gates", 65, true);
+console.log(user1.firstName);
+console.log(user1.lastName);
+console.log(user1.age);
+console.log(user1.isMale);
+console.log(user1.fullName);
+user1.startMoney = 300;
+console.log(user1.startMoney);
+console.log(user1.IBAN(1000));
+console.log(user1);
+
+// 2 вариант
+function User1(firstName, lastName, age, isMale, moneyInBank, salary) {
+	this.firstName = firstName;
+	this.lastName = lastName;
+	this.fullName = firstName + ' ' + lastName;
+	this.age = age;
+	this.isMale = isMale;
+	this.moneyInBank = moneyInBank;
+	this.salary = salary;
+
+	this.getSalary = function (monthNumber) {
+		return this.moneyInBank += (this.salary * monthNumber);
+	}
+}
+const user2 = new User1('Karl', 'Marx', 238, true, 0, 100);
+const user3 = new User1('John', 'Rockfeller', 175, true, 10000000, 10000000);
+
+console.log(user2);
+console.log(user3);
