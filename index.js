@@ -1,38 +1,37 @@
 //==================================================================
+// CRUD
+//Create. Литеральная запись объекта.
+const monitor = {
+	width: "70sm",
+	color: "red",
+	manufacturer: "Samsung",
+	isOn: true,
+	price: 500,
+	switchOff: function () {
+		alert("Monitor switched off");
+	},
+	switchOn: function () {
+		alert("Monitor switched on");
+	},
+};
 
-//Мой вариант
-const PASSWORD = "admin";
-let userPassword = prompt("Введите пароль");
+const human = {
+	gender: "male",
+	year: 2000,
+	weight: 50,
+	height: 165,
+	isWork: true,
+	speak: function () {
+		alert("Human talking");
+	},
+};
 
-while (userPassword) {
-	if (userPassword !== PASSWORD) {
-		userPassword = prompt("Введите пароль");
-	} else {
-		break;
-	}
-}
+//Read
+console.log(monitor);
+console.log(human);
 
-// 2 вариант
-while (true) {
-	let userPassword = prompt("Введите пароль");
-	if (userPassword === PASSWORD) {
-		break;
-	}
-}
+//Update
+monitor.isOn = false;
 
-// ограничить до 5 раз
-const MAX_TRIES = 5;
-let tries = 0;
-
-while (true) {
-	const userPassword = prompt("Введите пароль");
-	tries++;
-	if (userPassword === PASSWORD) {
-		alert("Вы вошли");
-		break;
-	}
-	if (tries >= MAX_TRIES) {
-		alert("Пока!");
-		break;
-	}
-}
+//Delete
+delete monitor.width;
