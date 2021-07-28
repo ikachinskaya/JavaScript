@@ -1,36 +1,87 @@
-alert('Hello World');
-alert(5555);
-console.log(42);
+// Function expression - функциональное выражение
+// Сумма двух чисел
+const getSumOfTwoNumbers = function (value1, value2) {
+	if (isNaN(value1 - value2)) {
+		alert("Incorrect data");
 
-let num1 = 5;
-const num2 = 7;
+		return null;
+	} else {
+		const result = value1 + value2;
+	}
+}
+//==================================================================
 
-console.log("сложение: ", num1 + num2);
-console.log("вычитание: ", num1 - num2);
-console.log("умножение: ", num1 * num2);
-console.log("деление: ", num1 / num2);
-console.log("остаток от деления: ", num1 % num2);
-console.log("возведение в степень: ", num1 ** num2);
+const myFirstJSFunc = function () {
+	alert("Hello, world!");
+};
 
-let value1 = "cat";
-let value2 = "dog";
+myFirstJSFunc();
+//==================================================================
 
-console.log(value1 > value2);
+// Найти из двух чисел минимальное
+const getMinNumbers = function (value1, value2) {
+	if (isNaN(value1 - value2)) {
+		return null;
+	}
+	if (value1 < value2) {
+		return value1;
+	}
+	return value2;
+};
+//==================================================================
 
-value1 += "dog";
-console.log(value1);
+// Найти из двух чисел максимальное
+const getMaxNumbers = function (value1, value2) {
+	if (isNaN(value1 - value2)) {
+		return null;
+	}
+	if (value1 > value2) {
+		return value1;
+	}
+	return value2;
+};
+//==================================================================
 
-let a = 5;
-let b = 7;
-let c = (a, b, a + b);
-console.log(c);
+// Проверить число на четность
+const isEvenNumbers = function (value) {
+	if (value % 2 === 0) {
+		return true;
+	} else return false;
+	return value % 2 === 0; //т.к. value % 2 === 0 - это true!
+};
+//==================================================================
 
-console.log(NaN === NaN);
+// Решить квадраное уравнение
+// 1 вариант
+const solveSquareExpression = function (a, b, c) {
+	if (isNaN(a - b - c)) {
+		return null;
+	}
+	const d = b * b - 4 * a * c;
+	if (d < 0) {
+		return NaN;
+	}
+	if (d === 0) {
+		const x = (-b / 2) * a;
+		return x;
+	}
+	const dSquareRoot = d ** (1 / 2);
+	const x1 = (-b + dSquareRoot) / (2 * a);
+	const x2 = (-b - dSquareRoot) / (2 * a);
+	return [x1, x2];
+};
 
-const myName = prompt("Enter your name: ");
-alert("Hello, " + myName);
-
-const number1 = +prompt("Enter first number: ");
-const number2 = +prompt("Enter first number: ");
-const result = number1 + number2;
-alert(result);
+// 2 вариант
+const solveSquareExpression = function (a, b, c) {
+	if (isNaN(a - b - c)) {
+		return null;
+	}
+	const d = b * b - 4 * a * c;
+	if (d < 0) {
+		return NaN;
+	}
+	const dSquareRoot = d ** (1 / 2);
+	const x1 = (-b + dSquareRoot) / (2 * a);
+	const x2 = (-b - dSquareRoot) / (2 * a);
+	return [x1, x2];
+};
