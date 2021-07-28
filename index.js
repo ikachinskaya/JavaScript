@@ -3,7 +3,9 @@ const user = {
 	firstName: 'Null',
 	lastName: 'Nullovna',
 	age: 18,
-	isMale: false
+	isMale: false,
+	0: 'secret',
+	'full name': 'Null Nullovna'
 }
 const user1 = {
 	firstName: 'Undefined',
@@ -17,3 +19,5 @@ function sayHello(user) {
 }
 console.log(sayHello(user));
 console.log(sayHello(user1));
+console.log(user[0]);
+console.log(user['full name']);
