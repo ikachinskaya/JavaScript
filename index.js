@@ -1,63 +1,51 @@
 //==================================================================
-function UserProto() {
-	this.login = function () {
-	}
+// Метод forEach() выполняет указанную функцию один раз для каждого элемента в массиве.
+//Принимает (текущий элемент, [индекс], [массив])
 
-	this.logout = function () {
-		return 'you logged out'
-	}
-
-	this.createComment = function () {
-	}
+const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+// с помощью for умножить каждый элемент массива на 2
+for (let i = 0; i < arr.length; i++) {
+	console.log(arr[i] * 2);
 }
 
-function User(username, email, password) {
-	this.username = username;
-	this.email = email;
-	this.password = password;
-	this.isAdmin = false;
-	this.isBanned = false;
+// с помощью forEach
+// 1 вариант
+function double(number) {
+	const result = number * 2;
+	console.log(result);
+	return result;
 }
-//создаем объект прототип User
-const userPrototype = new UserProto();
+arr.forEach(double);
 
-//говорим, что у User прототип - userPrototype
-User.prototype = userPrototype;
+// 2 вариант
+arr.forEach(function (number) {
+	console.log(number * 2);
+});
 
-const user1 = new User('destrouer997', 'destr@mylo.com', '12343');
+// вывести в консоль
+arr.forEach(function (elem) {
+	console.log(elem);
+});
+//==================================================================
 
-function AdminProto() {
-	this.ban = function (user) {
-		if (user.isAdmin === true) {
-			throw new Error('Нельзя банить админов');
-		}
-		user.isBanned = true;
-		return user;
-	}
+const users = [
+	{ firstName: "User1", lastName: "Test", age: 20 },
+	{ firstName: "User2", lastName: "Test", age: 13 },
+	{ firstName: "User3", lastName: "Test", age: 50 },
+	{ firstName: "User4", lastName: "Test", age: 77 },
+	{ firstName: "User5", lastName: "Test", age: 45 },
+	{ firstName: "User6", lastName: "Test", age: 19 },
+	{ firstName: "User7", lastName: "Test", age: 415 },
+];
+
+function greet(user) {
+	const greeting = `Привет ${user.firstName} ${user.lastName}`;
+	console.log(greeting);
+	return greeting;
 }
+users.forEach(greet);
 
-function Admin(username, email, password) {
-	this.username = username;
-	this.email = email;
-	this.password = password;
-	this.isAdmin = true;
-	this.isBanned = false;
+// forEach без forEach
+for (let i = 0; i < users.length; i++) {
+	greet(users[i]);
 }
-
-//создаем объект прототип Admin
-const admProto = new AdminProto();
-
-//говорим, что у AdminProto прототип - userPrototype
-AdminProto.prototype = userPrototype;
-
-//говорим, что у Admin прототип - admProto
-Admin.prototype = admProto;
-
-const admin1 = new Admin('Test', 'Testovich', 12323);
-
-admin1.__proto__ = admProto;
-
-const admin2 = new Admin('Test2', 'Testovich2', 12323);
-// const userPrototype = new UserProto();
-
-// User.prototype = userPrototype;
