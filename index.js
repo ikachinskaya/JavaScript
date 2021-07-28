@@ -1,40 +1,18 @@
 //==================================================================
-const phonesArray = ['1356456453', '3543545746'];
-const phonesArray2 = new Array('1356456453', '3543545746');
+function Student(firstName, lastName, age, isMale) {
+	this.firstName = firstName;
+	this.lastName = lastName;
+	this.age = age;
+	this.isMale = isMale;
+	this.study = study;
+}
 
-const arr = [];
-arr.push("Персик");
-arr.push("Виноград");
-arr.push("Апельсин");
-arr.push("Арбуз");
-arr.push("Клубника");
-arr.push("Малина");
-arr.push("Ежевика");
-arr.push("Кукуруза");
-console.log(arr);
-arr.pop();
-console.log(arr);
-arr.pop();
-console.log(arr);
-arr.pop();
-console.log(arr);
+function study() {
+	return `Student ${this.firstName} ${this.lastName} is studying`;
+}
 
-const arrNumbers = [5, 96, 456, 842, 2, 5465, 612, 4768];
-console.log(arrNumbers);
+const student1 = new Student('Test', 'Testovich', 22, true);
+const student2 = new Student('Test1', 'Testovich1', 221, true);
 
-const arrProducts = new Array(
-	"Кефир",
-	"Молоко",
-	"Мясо",
-	"Хлеб",
-	"Колбаса",
-	"Картошка"
-);
-
-console.log(arrProducts);
-
-arrProducts.pop();
-console.log(arrProducts);
-
-arrProducts.push("Рыба");
-console.log(arrProducts);
+console.log(student1);
+console.log(student2);
