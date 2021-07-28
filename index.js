@@ -1,13 +1,40 @@
 //==================================================================
-function createMultiplicationTable() {
-	const resultingTable = {};
+const phonesArray = ['1356456453', '3543545746'];
+const phonesArray2 = new Array('1356456453', '3543545746');
 
-	for (let i = 1; i < 10; i++) {
-		for (let j = 1; j < 10; j++) {
-			resultingTable[`${i} * ${j} = `] = j * i;
-		}
-	}
-	return resultingTable;
-}
+const arr = [];
+arr.push("Персик");
+arr.push("Виноград");
+arr.push("Апельсин");
+arr.push("Арбуз");
+arr.push("Клубника");
+arr.push("Малина");
+arr.push("Ежевика");
+arr.push("Кукуруза");
+console.log(arr);
+arr.pop();
+console.log(arr);
+arr.pop();
+console.log(arr);
+arr.pop();
+console.log(arr);
 
-console.table(createMultiplicationTable());
+const arrNumbers = [5, 96, 456, 842, 2, 5465, 612, 4768];
+console.log(arrNumbers);
+
+const arrProducts = new Array(
+	"Кефир",
+	"Молоко",
+	"Мясо",
+	"Хлеб",
+	"Колбаса",
+	"Картошка"
+);
+
+console.log(arrProducts);
+
+arrProducts.pop();
+console.log(arrProducts);
+
+arrProducts.push("Рыба");
+console.log(arrProducts);
