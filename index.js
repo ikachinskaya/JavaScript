@@ -1,37 +1,55 @@
 //==================================================================
-// CRUD
-//Create. Литеральная запись объекта.
-const monitor = {
-	width: "70sm",
-	color: "red",
-	manufacturer: "Samsung",
-	isOn: true,
-	price: 500,
-	switchOff: function () {
-		alert("Monitor switched off");
-	},
-	switchOn: function () {
-		alert("Monitor switched on");
+const cat1 = {
+	name: "Оболтус",
+	breed: "Сиамский",
+	age: 5,
+	color: "серый",
+	isMale: true,
+	sleep: function () {
+		return "ZZZ...";
 	},
 };
 
-const human = {
-	gender: "male",
-	year: 2000,
-	weight: 50,
-	height: 165,
-	isWork: true,
-	speak: function () {
-		alert("Human talking");
+const cat2 = {
+	name: "Арнольд",
+	breed: "Шотландский вислоухий",
+	age: 2,
+	color: "серый",
+	isMale: false,
+	sleep: function () {
+		return "ZZZ...";
 	},
 };
 
-//Read
-console.log(monitor);
-console.log(human);
+const cat3 = {
+	name: "Васька",
+	breed: "Дворовой",
+	age: 5,
+	color: "серый",
+	isMale: true,
+	sleep: function () {
+		return "ZZZ...";
+	},
+};
 
-//Update
-monitor.isOn = false;
+// Функция-конструктор котов
+function Cat(name, breed, age, color, isMale) {
+	this.name = name;
+	this.breed = breed;
+	this.age = age;
+	this.color = color;
+	this.isMale = isMale;
 
-//Delete
-delete monitor.width;
+	this.sleep = function () {
+		return "ZZZZZZ....";
+	};
+
+	this.run = function () {
+		return "Tgdim....tgdim....";
+	};
+}
+
+//new говорит return this
+const cat1 = new Cat("Marsik", "Dvor", 9, "grey", true);
+console.log(cat1);
+console.log(cat1.run());
