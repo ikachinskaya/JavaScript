@@ -1,41 +1,38 @@
 //==================================================================
-let counter = 0;
-while (true) {
-	counter++;
-	console.log(counter);
 
-	if (counter >= 1000) {
+//Мой вариант
+const PASSWORD = "admin";
+let userPassword = prompt("Введите пароль");
+
+while (userPassword) {
+	if (userPassword !== PASSWORD) {
+		userPassword = prompt("Введите пароль");
+	} else {
 		break;
 	}
 }
 
-let count = 1000;
+// 2 вариант
 while (true) {
-	console.log(count);
-	count--;
-
-	if (count < 0) {
+	let userPassword = prompt("Введите пароль");
+	if (userPassword === PASSWORD) {
 		break;
 	}
 }
 
-let counter1 = 0;
-while (true) {
-	counter1++;
-	if (counter1 % 2 === 0) {
-		console.log(counter1);
-	} else if (counter1 >= 1000) {
-		break;
-	}
-}
+// ограничить до 5 раз
+const MAX_TRIES = 5;
+let tries = 0;
 
 while (true) {
-  if (counter % 2 === 1) {
-    continue;
-  }
-  counter++;
-  console.log(counter);
-  if (counter >= 1000) {
-    break;
-  }
+	const userPassword = prompt("Введите пароль");
+	tries++;
+	if (userPassword === PASSWORD) {
+		alert("Вы вошли");
+		break;
+	}
+	if (tries >= MAX_TRIES) {
+		alert("Пока!");
+		break;
+	}
 }
