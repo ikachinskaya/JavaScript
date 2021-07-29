@@ -1,27 +1,16 @@
 //==================================================================
-/*ЧИСТАЯ ФУНКЦИЯ:
-•	Является детерминированной;
-•	Не обладает побочными эффектами.
-Детерминированная функция каждый раз возвращает один и тот же результат, если предоставлять им один и тот же набор значений.
-Побочные эффекты – любые действия работающей программы, изменяющей среду выполнения. (alert, console.log, изменение функцией глобальной переменной(let), объекта и т.д., запрос на сервер).*/
-
-'use strict';
-// functional expression
-const anotherSum = function (a, b) {
-	return a + b;
+function highOrderFunction(callbackFunction, num1, num2) {
+	return callbackFunction(num1, num2);
 }
 
-// function decrlaration
-function sum(a, b) {
-	return a + b;
+const hofSum = highOrderFunction(function (elem, elem2) {
+	return elem + elem2;
+}, 5, 5);
+
+function hof() {
+	return function () {
+		return true;
+	}
 }
 
-function multiply(a, b) {
-	return a * b;
-}
-
-function square(number) {
-	const result = multiply(number, number);
-
-	return result;
-}
+const test = hof();
