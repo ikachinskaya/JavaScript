@@ -1,14 +1,27 @@
 //==================================================================
-"use strict";
-const newspaper = {
-	title: "Ny Post - Murzilka",
-	articles: ["Main news", "Article not main", "test1234", "give more money"],
-	showArticles() {
-		this.articles.forEach((article, index) => {
-			//console.log(`${article}`);
-			console.log(`Newspaper ${this.title} Article №${index + 1} : ${article}`);
-		});
-	},
-};
+/*ЧИСТАЯ ФУНКЦИЯ:
+•	Является детерминированной;
+•	Не обладает побочными эффектами.
+Детерминированная функция каждый раз возвращает один и тот же результат, если предоставлять им один и тот же набор значений.
+Побочные эффекты – любые действия работающей программы, изменяющей среду выполнения. (alert, console.log, изменение функцией глобальной переменной(let), объекта и т.д., запрос на сервер).*/
 
-newspaper.showArticles();
+'use strict';
+// functional expression
+const anotherSum = function (a, b) {
+	return a + b;
+}
+
+// function decrlaration
+function sum(a, b) {
+	return a + b;
+}
+
+function multiply(a, b) {
+	return a * b;
+}
+
+function square(number) {
+	const result = multiply(number, number);
+
+	return result;
+}
