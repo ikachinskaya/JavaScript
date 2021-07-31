@@ -1,44 +1,18 @@
 //==================================================================
 "use strict";
-/*...rest - остаточные параметры
-... - собери оставшиеся параметры и положи их в массив
-...rest всегда должен быть последним*/
-
-//1 вариант
-const arrowSum = (...rest) => {
-	let result = 0;
-	for (let i = 0; i < rest.length; i++) {
-		result += rest[i];
+function sum(a, b) {
+	if (typeof a !== 'number' || typeof b !== 'number' || isNaN(a - b)) {
+		throw new TypeError('Invalid number');
 	}
-	return result;
-}
-console.log(arrowSum(5, 6));
-
-//2 вариант
-const arrowSum2 = (...rest) => {
-	const callback = function (accumulator, currentValue) {
-		return accumulator + currentValue;
+	if (a < 0) {
+		throw new RangeError('Число a должно быть положительным');
 	}
-	return rest.reduce(callback);
+	return a + b;
 }
-console.log(arrowSum2(5, 6));
+console.log(sum(1, 'test'));
 
-//со стрелкой
-const arrowSum3 = (...rest) => rest.reduce((accumulator, currentValue) => accumulator + currentValue);
-console.log(arrowSum3(5, 6));
-//==================================================================
+//Reference Error
+console.log(abracadabra);
 
-/*... - spread-оператор
-- расширяет перебираемый объект в спиоск аргументов
-- работает только с итерируемыми объектами
-- можно использовать для слияния массивов*/
-
-const numbers = [1, 2, 3, 4, 5, 6];
-console.log(numbers);
-console.log(...numbers);
-
-const numbers2 = [11, 22, 33, 44, 55, 66];
-console.log(numbers2);
-console.log(...numbers2);
-
-console.log(...numbers, ...numbers2);
+//SyntaxError
+//...test1;
