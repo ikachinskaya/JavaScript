@@ -1,66 +1,64 @@
 //==================================================================
 "use strict";
-class Human {
-  constructor(name, lastname, age) {
-    if (isNaN(age) || typeof age !== "number") {
-      throw new TypeError("Age must be a number");
-    }
-    if (age < 0) {
-      throw new RangeError("Age must be >0");
-    }
-
-    //свойства создаваемого экземпляра класса
+class Auto {
+  constructor(weightAuto, maxSpeed, currentSpeed, name) {
+    this.weightAuto = weightAuto;
+    this.maxSpeed = maxSpeed;
+    this.currentSpeed = currentSpeed;
     this.name = name;
-    this.lastname = lastname;
-    this.age = age;
   }
 
+  set weightAuto(newWeightAuto) {
+    if (isNaN(newWeightAuto) || typeof newWeightAuto !== "number") {
+      throw new TypeError("Invalid type");
+    }
+    if (newWeightAuto < 0) {
+      throw new RangeError("Weigth auto cant be a negative");
+    }
+    this._weightAuto = newWeightAuto;
+  }
+  get weightAuto() {
+    return this._weightAuto;
+  }
+
+  set maxSpeed(newMaxSpeed) {
+    if (isNaN(newMaxSpeed) || typeof newMaxSpeed !== "number") {
+      throw new TypeError("Invalid type");
+    }
+    if (newMaxSpeed < 0) {
+      throw new RangeError("Max speed auto cant be a negative");
+    }
+    this._maxSpeed = newMaxSpeed;
+  }
+  get maxSpeed() {
+    return this._maxSpeed;
+  }
+
+  set currentSpeed(newCurrentSpeed) {
+    if (isNaN(newCurrentSpeed) || typeof newCurrentSpeed !== "number") {
+      throw new TypeError("Invalid type");
+    }
+    if (newCurrentSpeed < 0) {
+      throw new RangeError("Current speed auto cant be a negative");
+    }
+    this._currentSpeed = newCurrentSpeed;
+  }
+  get currentSpeed() {
+    return this.currentSpeed;
+  }
+
+  set name(newName) {
+    if (typeof newName !== "string") {
+      throw new TypeError("Invalid type");
+    }
+    if (newName.trim() === "") {
+      throw new Error("Name must not be empty");
+    }
+    this._name = newName.trim();
+  }
   get name() {
     return this._name;
   }
-  set name(newName) {
-    if (typeof newName !== "string") {
-      throw new TypeError("Ведите строку");
-    }
-    this._name = newName;
-  }
-
-  get lastname() {
-    return this._lastname;
-  }
-  set lastname(newLastName) {
-    if (typeof newLastName !== "string") {
-      throw new TypeError("Ведите строку");
-    }
-    this._lastname = newLastName;
-  }
-
-  get age() {
-    return this._age;
-  }
-
-  set age(newAge) {
-    if (isNaN(newAge) || typeof newAge !== "number") {
-      throw new TypeError("Age must be a number");
-    }
-    if (newAge < 0) {
-      throw new RangeError("Age must be >0");
-    }
-    this._age = newAge;
-  }
-  //методы у экземпляров класса
-  //создаст метод один раз и закинет в объект каждого экземпляра
-  walk = function () {
-    console.log("I am walking right now");
-  };
-
-  isAdult = function () {
-    return this.age >= 18;
-  };
 }
-
-const human1 = new Human("Coolkid", "Coolkidovich", 18);
-const human2 = new Human("Coolkid", "Coolkidovich", 5);
-
-console.log(human1);
-console.log(human2);
+const auto1 = new Auto(2000, 300, 350, "Toyota");
+console.log(auto1);
