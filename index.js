@@ -59,6 +59,14 @@ class Auto {
   get name() {
     return this._name;
   }
+
+  /* Статический метод*/ 
+  static isCar(carInstance) {
+    return carInstance instanceof Car;
+  }
 }
 const auto1 = new Auto(2000, 300, 350, "Toyota");
 console.log(auto1);
+
+/*Статический метод вызывается для всего класса в целом, а не для отдельного объекта.
+Ключевое слово this не используется.*/
