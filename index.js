@@ -1,72 +1,41 @@
 //==================================================================
 "use strict";
-let thread = [];
 
-class User {
-  constructor(name, lastname, age) {
+class Figure {
+  constructor(name, secret) {
     this.name = name;
-    this.lastname = lastname;
-    this.age = age;
-    this.isBanned = false;
   }
 
-  getFullName() {
-    return `${this.name} ${this.lastname}`;
+  getArea() {}
+}
+
+class Triangle extends Figure {
+  constructor(a, h) {
+    super("Треугольник");
+
+    this.a = a;
+    this.h = h;
   }
 
-  createMessage(message) {
-    thread.push(message);
-    return message;
+  getArea() {
+    return this.a * this.h * 0.5;
   }
 }
 
-class Moderator extends User {
-  constructor(name, lastName, age, permission) {
-    super(name, lastName, age);
-    this.permission = permission;
-  }
-  deleteMessage(messageId) {
-    thread.pop();
+class Square extends Figure {
+  constructor(a) {
+    super("Квадрат");
+
+    this.a = a;
   }
 
-  betterDeleteMessage(messageId) {
-    thread = thread.filter((message, i) => {
-      return messageId !== i;
-    });
+  getArea() {
+    return this.a * this.a;
   }
 }
 
-class Admin extends Moderator {
-  constructor(name, lastName, age, permission, email) {
-    super(name, lastName, age, permission);
-    this.email = email;
-  }
-  banUsers(user) {
-    user.isBanned = true;
-  }
-}
+const triangle = new Triangle(2, 5);
+const square = new Square(5);
 
-const user1 = new User("Test", "Testovich", 50);
-const moderator1 = new Moderator("Petr", "Semenovich", 45, {
-  canDeleteMessages: true,
-});
-const admin1 = new Admin(
-  "Admin",
-  "Adminovich",
-  55,
-  { canDeleteUsers: true, canDeleteMessages: true },
-  "test@mail.com"
-);
-
-admin1.createMessage("Привет");
-admin1.createMessage("Здрасьте");
-admin1.createMessage("Hello");
-admin1.createMessage("Я тут");
-admin1.createMessage("Пока!");
-console.log(thread);
-
-admin1.betterDeleteMessage(1);
-console.log(thread);
-
-admin1.banUsers(user1);
-console.log(user1);
+console.log(triangle);
+console.log(square);
