@@ -34,8 +34,19 @@ class Square extends Figure {
   }
 }
 
+function getFigureArea(figure) {
+  if (figure instanceof Figure) {
+    return figure.getArea();
+  }
+  throw new TypeError("Это не фигура");
+}
+
 const triangle = new Triangle(2, 5);
 const square = new Square(5);
-
+const testFigure = new Figure("Тестовая фигура");
 console.log(triangle);
 console.log(square);
+
+console.log(getFigureArea(triangle));
+console.log(getFigureArea(square));
+console.log(getFigureArea(testFigure));
