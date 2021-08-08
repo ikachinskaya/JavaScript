@@ -1,40 +1,52 @@
 //==================================================================
 "use strict";
 
-/*Символ (Symbol) — это уникальный и неизменяемый тип данных, 
-который может быть использован как идентификатор для свойств объектов.*/
+class MyArray {
+  constructor(...startingValues) {
+    this.length = 0;
+    this.push(...startingValues);
+  }
 
-const sym1 = Symbol();
-const sym2 = Symbol();
-const userFrontId = Symbol("user id for front");
+  push(...incomingValues) {
+    for (const value of incomingValues) {
+      this[this.length++] = value;
+    }
+    return this.length;
+  }
 
-const user = {
-  id: 0,
-  name: "Feofan",
-  lastName: "Petrov",
-  [userFrontId]: 500,
-};
+  unshift(...incomingValues) {
+    for (let i = this.length - 1; i >= 0; i--) {
+      this[i + incomingValues.length] = this[i];
+    }
+    for (let i = 0; i < incomingValues.length; i++) {
+      this[i] = incomingValues[i];
+    }
+    return this.length;
+  }
 
-console.log(user);
-console.log(user[userFrontId]);
-
-//getOwnPropertySymbols - возвращает массив всех символьных свойств, найденных на переданном объекте
-const userSymbol = Object.getOwnPropertySymbols(user);
-console.log(userSymbol);
-
-console.log(user[userSymbol[0]]);
-//==================================================================
-
-const numberArray = [59, 94, 9, 41, 2];
-
-//императивный код
-for (let i = 0; i < numberArray.length; i++) {
-  console.log(numberArray[i]);
+  [Symbol.iterator]() {
+    let currentIndex = 0;
+    const context = this;
+    return {
+      next() {
+        return {
+          value: context[currentIndex++],
+          done: currentIndex > context.length,
+        };
+      },
+    };
+  }
 }
 
-/*Цикл for..of. для его работы нужен Symbol.iterator
-Symbol.iterator - это метод, возвращающий итератор по умолчанию для объекта.*/
+const myArray = new MyArray(11, 22, 33, 44);
+console.log(myArray);
 
-for (const number of numberArray) {
-  console.log(number);
+for (const value of myArray) {
+  console.log(value);
 }
+
+myArray.push(5, 6, 7, 8);
+console.log(myArray);
+
+myArray.unshift(111, 222, 333);
+console.log(myArray);
