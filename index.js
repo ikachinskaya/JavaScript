@@ -1,52 +1,144 @@
 //==================================================================
 "use strict";
 
-class MyArray {
-  constructor(...startingValues) {
-    this.length = 0;
-    this.push(...startingValues);
-  }
+/*Деструктуризация - особый способ создания переменных*/
 
-  push(...incomingValues) {
-    for (const value of incomingValues) {
-      this[this.length++] = value;
-    }
-    return this.length;
-  }
+/*Деструктуризация объектов*/
+const monitor = {
+  matrix: "Ips",
+  sizes: {
+    width: {
+      value: 50,
+      unit: "cm",
+    },
+    height: {
+      value: 20,
+      unit: "cm",
+    },
+  },
+  resolution: {
+    horizontal: {
+      value: 1920,
+      unit: "px",
+    },
 
-  unshift(...incomingValues) {
-    for (let i = this.length - 1; i >= 0; i--) {
-      this[i + incomingValues.length] = this[i];
-    }
-    for (let i = 0; i < incomingValues.length; i++) {
-      this[i] = incomingValues[i];
-    }
-    return this.length;
-  }
+    vertical: {
+      value: 1080,
+      unit: "px",
+    },
+  },
+  color: "black",
+  manufactures: "Samsung",
+  refreshRate: 60,
+};
 
-  [Symbol.iterator]() {
-    let currentIndex = 0;
-    const context = this;
-    return {
-      next() {
-        return {
-          value: context[currentIndex++],
-          done: currentIndex > context.length,
-        };
-      },
-    };
-  }
+const {
+  matrix: monitorMatrix,
+  sizes: {
+    width: { value: monitorWidth },
+    height: { value: monitorHeight },
+  },
+  resolution: {
+    horizontal: { value: monitorHorizontal },
+    vertical: { value: monitorVertical },
+  },
+
+  color: monitorColor,
+  manufactures: monitorManufactures,
+  refreshRate: monitorRefreshRate,
+} = monitor;
+
+console.log(monitorMatrix);
+console.log(monitorWidth);
+console.log(monitorHeight);
+console.log(monitorHorizontal);
+console.log(monitorVertical);
+console.log(monitorColor);
+console.log(monitorManufactures);
+console.log(monitorRefreshRate);
+console.log("===============");
+
+const {
+  matrix: monitorMatrix_,
+  sizes: {
+    width: { value: monitorWidth_ },
+    height: { value: monitorHeight_ },
+  },
+  resolution: {
+    horizontal: { value: monitorHorizontal_ },
+    vertical: { value: monitorVertical_ },
+  },
+
+  ...restOfMonitor
+} = monitor;
+console.log(restOfMonitor);
+console.log("===============");
+
+//==================================================================
+
+/*Деструктуризация массивов*/
+const array = [-999, 2, 58, 9];
+console.log(array);
+
+const [first] = array;
+console.log(first);
+
+const [one, , three] = array;
+console.log(three);
+
+const [first_, ...restOfArray] = array;
+console.log(restOfArray);
+console.log("===============");
+//==================================================================
+/*Деструктуризация в функциях*/
+
+function calculateDiagonalOfMonitor(monitor) {
+  const {
+    sizes: {
+      width: { value: monitorWidth },
+      height: { value: monitorHeight },
+    },
+  } = monitor;
+
+  return Math.sqrt(monitorWidth ** 2 + monitorHeight ** 2);
 }
 
-const myArray = new MyArray(11, 22, 33, 44);
-console.log(myArray);
-
-for (const value of myArray) {
-  console.log(value);
+console.log(calculateDiagonalOfMonitor(monitor));
+//==================================================================
+function calculateDiagonalOfMonitor_({
+  sizes: {
+    width: { value: monitorWidth },
+    height: { value: monitorHeight },
+  },
+}) {
+  return Math.sqrt(monitorWidth ** 2 + monitorHeight ** 2);
 }
 
-myArray.push(5, 6, 7, 8);
-console.log(myArray);
+console.log(calculateDiagonalOfMonitor_(monitor));
+//==================================================================
+const calculateDiagonalOfMonitor__ = ({
+  sizes: {
+    width: { value: monitorWidth },
+    height: { value: monitorHeight },
+  },
+}) => Math.sqrt(monitorWidth ** 2 + monitorHeight ** 2);
 
-myArray.unshift(111, 222, 333);
-console.log(myArray);
+console.log(calculateDiagonalOfMonitor__(monitor));
+console.log("===============");
+//==================================================================
+
+const user = {
+  name: "Test",
+  lastName: "Testovich",
+};
+
+// function sayHi({ name, lastname }) {
+//   return `${name} ${lastname}`;
+// }
+// console.log(sayHi());
+
+function sayHello(user = { name: "Undefined", lastName: "Nullovich" }) {
+  const { name, lastName } = user;
+  return `Hello ${name} ${lastName}`;
+}
+console.log(sayHello());
