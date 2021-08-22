@@ -4,22 +4,26 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
     <title>JavaScript</title>
   </head>
   <body>
-    <div>
-      <button id="btn">Click me</button>
-      <button id="btn2">Click</button>
-      <button id="btn3">Click me</button>
-    </div>
+    <button
+      data-key="value"
+      data-test-property="test"
+      data-secretURL="http://127.0.0.1:3000"
+    >
+      Login
+    </button>
+    <button data-secretURL="http://127.0.0.1:3001">Sign Up</button>
     <br />
-    <div>
-      <button class="btn">Button1</button>
-      <button class="btn">Button2</button>
-    </div>
     <br />
-    <div>
-      <button class="button">BUTTON</button>
+    <div id="root">
+      <button data-color="red">Red</button>
+      <button data-color="blue">Blue</button>
+      <button data-color="yellow">Yellow</button>
+      <button data-color="green">Green</button>
+      <button data-color="">Reset</button>
     </div>
     <script src="index.js"></script>
   </body>
