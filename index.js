@@ -1,144 +1,100 @@
 //==================================================================
 "use strict";
 
-/*Деструктуризация - особый способ создания переменных*/
+/*  Замыкание - функция, которая запоминает свои внешние переменные и может получить к ним доступ.
+Все функции в JS изначально являются замыканиями. */
 
-/*Деструктуризация объектов*/
-const monitor = {
-  matrix: "Ips",
-  sizes: {
-    width: {
-      value: 50,
-      unit: "cm",
-    },
-    height: {
-      value: 20,
-      unit: "cm",
-    },
-  },
-  resolution: {
-    horizontal: {
-      value: 1920,
-      unit: "px",
-    },
+//Выведет 10
+const value = 10;
 
-    vertical: {
-      value: 1080,
-      unit: "px",
-    },
-  },
-  color: "black",
-  manufactures: "Samsung",
-  refreshRate: 60,
-};
-
-const {
-  matrix: monitorMatrix,
-  sizes: {
-    width: { value: monitorWidth },
-    height: { value: monitorHeight },
-  },
-  resolution: {
-    horizontal: { value: monitorHorizontal },
-    vertical: { value: monitorVertical },
-  },
-
-  color: monitorColor,
-  manufactures: monitorManufactures,
-  refreshRate: monitorRefreshRate,
-} = monitor;
-
-console.log(monitorMatrix);
-console.log(monitorWidth);
-console.log(monitorHeight);
-console.log(monitorHorizontal);
-console.log(monitorVertical);
-console.log(monitorColor);
-console.log(monitorManufactures);
-console.log(monitorRefreshRate);
-console.log("===============");
-
-const {
-  matrix: monitorMatrix_,
-  sizes: {
-    width: { value: monitorWidth_ },
-    height: { value: monitorHeight_ },
-  },
-  resolution: {
-    horizontal: { value: monitorHorizontal_ },
-    vertical: { value: monitorVertical_ },
-  },
-
-  ...restOfMonitor
-} = monitor;
-console.log(restOfMonitor);
-console.log("===============");
-
-//==================================================================
-
-/*Деструктуризация массивов*/
-const array = [-999, 2, 58, 9];
-console.log(array);
-
-const [first] = array;
-console.log(first);
-
-const [one, , three] = array;
-console.log(three);
-
-const [first_, ...restOfArray] = array;
-console.log(restOfArray);
-console.log("===============");
-//==================================================================
-/*Деструктуризация в функциях*/
-
-function calculateDiagonalOfMonitor(monitor) {
-  const {
-    sizes: {
-      width: { value: monitorWidth },
-      height: { value: monitorHeight },
-    },
-  } = monitor;
-
-  return Math.sqrt(monitorWidth ** 2 + monitorHeight ** 2);
+function log() {
+  console.log("log function: ", value);
 }
 
-console.log(calculateDiagonalOfMonitor(monitor));
-//==================================================================
-function calculateDiagonalOfMonitor_({
-  sizes: {
-    width: { value: monitorWidth },
-    height: { value: monitorHeight },
-  },
-}) {
-  return Math.sqrt(monitorWidth ** 2 + monitorHeight ** 2);
+console.log(log());
+console.log("============");
+//====================
+
+//Выведет 20
+function wrapper() {
+  let value = 20;
+  console.log("log function: ", value);
 }
+console.log(wrapper());
+console.log("============");
+//====================
 
-console.log(calculateDiagonalOfMonitor_(monitor));
-//==================================================================
-const calculateDiagonalOfMonitor__ = ({
-  sizes: {
-    width: { value: monitorWidth },
-    height: { value: monitorHeight },
-  },
-}) => Math.sqrt(monitorWidth ** 2 + monitorHeight ** 2);
-
-console.log(calculateDiagonalOfMonitor__(monitor));
-console.log("===============");
-//==================================================================
-
-const user = {
-  name: "Test",
-  lastName: "Testovich",
-};
-
-// function sayHi({ name, lastname }) {
-//   return `${name} ${lastname}`;
-// }
-// console.log(sayHi());
-
-function sayHello(user = { name: "Undefined", lastName: "Nullovich" }) {
-  const { name, lastName } = user;
-  return `Hello ${name} ${lastName}`;
+function wrapper() {
+  let value = 20;
+  console.log("log function: ", value);
+  log(); //Выведет 10
 }
-console.log(sayHello());
+console.log(log());
+console.log("============");
+//====================
+
+function wrapper() {
+  let value = 20;
+
+  function log() {
+    console.log("log function: ", value);
+  }
+  console.log("log function: ", value);
+  log(); //Выведет 20
+}
+console.log(wrapper());
+console.log("============");
+//==================================================================
+
+//грязная функция
+let counter = 0;
+function increment() {
+  counter++;
+  return counter;
+}
+console.log(increment());
+console.log("============");
+
+//с помощью замыкания
+function makeCounter() {
+  let counter = 0; //замыкание здесь
+  return function increment() {
+    counter++;
+    return counter;
+  };
+}
+const count = makeCounter();
+console.log(count());
+console.log(count());
+console.log(count());
+console.log(count());
+console.log("============");
+
+//==================================================================
+
+function makeAdder(value) {
+  let result = value;
+  return function (number) {
+    return (result += number);
+  };
+}
+const adder = makeAdder(20);
+console.log(adder(10));
+console.log(adder(100));
+console.log(adder(1000));
+console.log(adder(0));
+console.log(adder(-100));
+console.log("============");
+//====================
+
+const makeAdder_ = (value) => (number) => (value += number);
+
+const adder_ = makeAdder_(20);
+console.log(adder_(10));
+console.log(adder_(100));
+console.log(adder_(1000));
+console.log(adder_(0));
+console.log(adder_(-100));
+//====================
+//==================================================================
+
