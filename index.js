@@ -1,53 +1,69 @@
 //==================================================================
 "use strict";
-
-/*DOM - Document Object Model
-  Каждый HTML-тег - объект. 
-  Вложенные теги - дети родительского элемента.
-  Текст внутри тега - объект.
-  DOM - представление HTML-документа в виде дерева тегов.
-  Каждый узел - объект.
-  Теги - узлы-элементы(элементы).
-  Текст внутри элементов - текстовый узел. Содержит только строку, не имеет потомков.
-  Пробелы и переводы троки - текстоые узлы.
-  */
-
-//Нашли кнопки
-const [firstBtn, , thirdBtn] = document.getElementsByTagName("button");
-
-let count = 0;
-//Создали функцию слушателя
-function btnAlert() {
-  alert(`Вы нажали кнопку ${++count}`);
+//Обработчик события отработает один раз
+const btn = document.querySelector("#btn");
+function alertBtn() {
+  alert("Клик");
+  btn.removeEventListener("click", alertBtn);
 }
 
-//Сказали кнопке при нажатии на нее, запускать функцию.
-firstBtn.addEventListener("click", btnAlert);
-thirdBtn.addEventListener("click", btnAlert);
-//==================================================================
+btn.addEventListener("click", alertBtn);
+//==================
 
-const par = document.getElementById("unique");
-console.log(par);
+const btn2 = document.querySelector("#btn2");
+btn2.addEventListener(
+  "click",
+  () => {
+    alert("Клик");
+  },
+  { once: true } //обработчик вызван не более одного раза, автоматически удаляется при вызове
+);
+//==================
 
-const testClass = document.getElementsByClassName("test");
-console.log(testClass);
+//В одну строку
+const btn3 = document.querySelector("#btn3");
+btn3.addEventListener("click", (event) => console.log(event));
+//==================
 
-const coolerPar = document.querySelector("#unique>span");
-console.log(coolerPar);
+function clickHandler(event) {
+  console.dir(event.currentTarget); //на ком висит обработчик, видно только когда событие обрабатывается
+  console.dir(event.target); //куда кликнули
+  console.log(event); //событие
+}
+document.body.addEventListener("click", clickHandler);
+//==================
 
-//NodeList
-const coolerPars = document.querySelectorAll("p");
-console.log(coolerPar);
+//Вывести текст на кнопке
+const buttons = document.querySelectorAll(".btn");
 
-const arr = [...coolerPars];
-console.log(arr);
-console.log("==============");
-//==================================================================
+function clickButton(event) {
+  alert(event.target.textContent);
+  //alert(event.target.innerText);
+}
+for (let btn of buttons) {
+  btn.addEventListener("click", clickButton);
+}
+//==================
 
-const h1 = document.querySelector(".main>h1");
-const img = document.querySelector(".main>img");
-const span = document.querySelector("span");
+//dispatchEvent - симулирует событие, для тестирования
+const clickEvent = new Event("wheel");
+btn.dispatchEvent(clickEvent);
+//==================
+//Стандартное поведение
+const btn10 = document.querySelector(".button");
+function listener(event) {
+  console.dir(event.currentTarget);
+  alert(`This is ${event.currentTarget}`);
+}
 
-console.log(h1);
-console.log(img);
-console.log(span);
+btn10.addEventListener("click", listener);
+document.body.addEventListener("click", listener);
+document.addEventListener("click", listener);
+window.addEventListener("click", listener);
+
+//==================
+//Переопределение поведения
+btn10.addEventListener("click", listener, true);
+document.body.addEventListener("click", listener, true);
+document.addEventListener("click", listener, true);
+window.addEventListener("click", listener, true);
