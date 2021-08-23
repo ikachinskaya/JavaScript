@@ -22,10 +22,40 @@ const buttons = document.querySelectorAll("button");
 
 function addColorDiv(event) {
   const { target: btn } = event;
-  const { dataset: { color } } = btn;
+  const {
+    dataset: { color },
+  } = btn;
   //div.style.backgroundColor = color;
   btn.parentElement.style.backgroundColor = color;
 }
-for (const btn of buttons) {
-  btn.addEventListener("click", addColorDiv);
+// for (const btn of buttons) {
+//   btn.addEventListener("click", addColorDiv);
+// }
+//=========================
+
+function addColorDiv_(event) {
+  const {
+    target,
+    target: {
+      dataset: { color },
+    },
+  } = event;
+  target.parentElement.style.backgroundColor = color;
 }
+// for (const btn of buttons) {
+//   btn.addEventListener("click", addColorDiv_);
+// }
+//=========================
+
+function addColorDiv__({
+  target,
+  target: {
+    dataset: { color },
+  },
+}) {
+  target.parentElement.style.backgroundColor = color;
+}
+for (const btn of buttons) {
+  btn.addEventListener("click", addColorDiv__);
+}
+//==================================================================
