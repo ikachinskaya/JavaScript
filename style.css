@@ -1,5 +1,32 @@
 #root {
-width: 300px;
-height: 300px;
-border: 1px solid;
+  width: 300px;
+  height: 150px;
+  border: 1px solid;
+}
+
+.createdPar {
+  background-color: lightgray;
+  padding: 20px;
+  border: 7px solid black;
+}
+
+.textColor {
+  color: blue;
+}
+.fontSize {
+  font-size: 25px;
+}
+
+.modal-window {
+  width: 200px;
+  height: 200px;
+  border: 2px solid;
+  position: relative;
+  text-align: center;
+}
+
+.modal-window-button {
+  position: absolute;
+  right: 0;
+  top: 0;
 }

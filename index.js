@@ -1,61 +1,65 @@
 //==================================================================
 "use strict";
-//getAttribute - для поиска любого атрибута
-//dataSet - свойство, предоставляющее доступ к пользовательским атрибутам
 
-const [btn1, btn2] = document.querySelectorAll("button");
+/*
+  createElement - создает новый элемент
+  appendChild - добавляет элемент в конец
+  append - добавляет несколько элементов в конец
+  remove - удаляет элемент
+  removeChild - удаляет дочерний элемент
+  classList - свойство, возвращает псевдомассив, содержащий все классы элемента
+    add - добавить класс
+    remove - удалить класс
+    toggle - если есть класс- удаляет, нет - добавляет
+    contains - проверяет, есть ли класс
+    length - количество классов у элемента
+ */
 
-function listener(event) {
-  console.log(event.target.getAttribute("data-secretURL"));
-  //console.dir(event.target.dataset);
-  const {
-    target: { dataset },
-  } = event;
-  console.dir(dataset);
-}
-btn1.addEventListener("click", listener);
-btn2.addEventListener("click", listener);
+const root = document.querySelector("#root");
+
+const firstPar = document.createElement("p");
+firstPar.textContent = "JS created me";
+
+const secondPar = document.createElement("p");
+secondPar.textContent = "Я буду по середине";
+
+const thirdPar = document.createElement("p");
+thirdPar.textContent = "Я буду последним";
+
+root.append(firstPar, secondPar);
+root.appendChild(thirdPar);
+
 //==================================================================
-
-const div = document.querySelector("#root");
-const buttons = document.querySelectorAll("button");
-
-function addColorDiv(event) {
-  const { target: btn } = event;
-  const {
-    dataset: { color },
-  } = btn;
-  //div.style.backgroundColor = color;
-  btn.parentElement.style.backgroundColor = color;
+function createElem(text) {
+  const par = document.createElement("p");
+  par.textContent = text;
+  par.style = "background-color: lightgray; padding: 20px";
+  par.style.color = "red";
+  par.style.border = "3px solid black";
+  par.style.fontSize = "25px";
+  document.body.append(par);
 }
-// for (const btn of buttons) {
-//   btn.addEventListener("click", addColorDiv);
-// }
-//=========================
 
-function addColorDiv_(event) {
-  const {
-    target,
-    target: {
-      dataset: { color },
-    },
-  } = event;
-  target.parentElement.style.backgroundColor = color;
-}
-// for (const btn of buttons) {
-//   btn.addEventListener("click", addColorDiv_);
-// }
-//=========================
+createElem("Я создан с помощью функции createElem");
 
-function addColorDiv__({
-  target,
-  target: {
-    dataset: { color },
-  },
-}) {
-  target.parentElement.style.backgroundColor = color;
+const classNameForPar = ["textColor", "fontSize"];
+
+function createTextPar(text) {
+  const par = document.createElement("p");
+  par.textContent = text;
+  par.setAttribute("class", "createdPar");
+  for (let i = 0; i < classNameForPar.length; i++) {
+    par.classList.add(classNameForPar[i]);
+  }
+  document.body.append(par);
 }
-for (const btn of buttons) {
-  btn.addEventListener("click", addColorDiv__);
-}
+
+createTextPar("Я создан с помощью функции createTextPar");
 //==================================================================
+/*МОДАЛЬНОЕ ОКНО */
+const btnClose = document.querySelector(".modal-window-button");
+function closeModalWindow(e) {
+  const { target } = e;
+  target.parentElement.remove();
+}
+btnClose.addEventListener("click", closeModalWindow);
