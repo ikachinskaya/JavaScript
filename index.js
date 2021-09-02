@@ -1,127 +1,62 @@
- 
 //==================================================================
 "use strict";
 
-// Сложность алгоритмов
+/* Структура данных — это конкретный способ хранения и организации данных.  */
 
-//Линейная сложность O(n)
-// Линейный поиск
+/*Stack — упорядоченная коллекция элементов, в которой добавление новых и удаление старых элементов 
+всегда происходит с одного конца коллекции. Обычно его называют вершиной стека. 
+"Last In First Out" (LIFO), то есть "последним зашёл, первый вышел".*/
 
-const value = 1207;
-const arr = [1, 5, 6, 91, 18, 9, 2, 8, 2, 7];
-
-const testArr = new Array(1000).fill(null).map((_, i) => i + 1);
-
-function linearSearch(arr, value) {
-  for (let i = 0; i < arr.length; i++) {
-    if (arr[i] === value) {
-      return true;
+//Stack
+/**
+ * @param {number} maxSize размер стека
+ */
+class Stack {
+  constructor(maxSize = 10, ...items) {
+    this.maxSize = maxSize;
+    this._size = 0;
+    for (let i = 0; i < items.length; i++) {
+      this.push(items[i]);
     }
   }
-  return false;
-}
-//==================================================================
 
-//Квадратичная сложность O(n^2), цикл в цикле
-
-function createMultiplicationTable(number) {
-  const table = [];
-  for (let i = 1; i <= number; i++) {
-    for (let j = 1; j <= number; j++) {
-      table.push(`${i} * ${j} = ${i * j}`);
+  push(item) {
+    if (this._size >= this.maxSize) {
+      throw new RangeError("Stack overflow");
     }
+    this[`_${this._size}`] = item;
+    this._size++;
+    return this._size;
   }
-  return table;
-}
-//==================================================================
 
-//Логарифмическая сложность O(log(n))
-//Бинарный поиск
-
-function binarySearch(arr, value) {
-  let start = 0;
-  let end = arr.length - 1;
-  let middle = Math.round((end + start) / 2);
-  while (true) {
-    if (arr[middle] === value) {
-      return true;
+  pop() {
+    if (this._size === 0) {
+      return;
     }
-    if (arr[middle] > value) {
-      end = middle;
-      middle = Math.ceil((end + start) / 2);
-    } else {
-      start = middle;
-      middle = (end + start) / 2;
-    }
-    if (start === end && start === middle) {
-      return false;
-    }
+    const deleted = this[`_${this._size - 1}`];
+    delete this[`_${this._size--}`];
+    return deleted;
   }
-  //return false;
+
+  pick() {
+    return this[`_${this._size}-1`];
+  }
 }
 
-// console.log(createMultiplicationTable(1));
-// console.log(createMultiplicationTable(2));
-// console.log(createMultiplicationTable(3));
-// console.log(createMultiplicationTable(250));
+const stack = new Stack();
+stack.push(1);
+stack.push(1);
+stack.push(1);
+stack.push(1);
+stack.push(1);
+stack.push(1);
+stack.push(1);
+stack.push(1);
+stack.push(1);
+stack.push(1);
+stack.pop();
+console.log(stack.pick());
+console.log(stack);
 
-console.time("Linear");
-console.log(linearSearch(testArr, value));
-console.timeEnd("Linear");
-
-console.time("Quadro");
-console.log(createMultiplicationTable(1000));
-console.timeEnd("Quadro");
-
-console.time("Binary");
-console.log(binarySearch(testArr, value));
-console.timeEnd("Binary");
-//==================================================================
-
-//Константная сложность О(1)
-//Односвязный список
-
-let listItem1 = {
-  value: 1,
-  next: listItem2,
-};
-let listItem2 = {
-  value: 2,
-  next: listItem3,
-};
-let listItem3 = {
-  value: 3,
-  next: null,
-};
-
-//Индексация и поиск O(n)
-for (let i = 0; i < 2; i++) {}
-
-//Вставка и удаление O(1)
-
-//Удаление
-let listItem1 = {
-  value: 1,
-  next: null,
-};
-//Вставка
-let listItem1 = {
-  value: 3,
-  next: listItem5,
-};
-
-//Двусвязный список
-let listItem1 = {
-  value: 1,
-  next: listItem2,
-  prev: null,
-};
-let listItem2 = {
-  value: 2,
-  next: listItem3,
-  prev: listItem1,
-};
-let listItem3 = {
-  value: 3,
-  next: listItem2,
-};
+const stack1 = new Stack(10, "test", "test12", "123", false);
+console.log(stack1);
