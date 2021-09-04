@@ -3,100 +3,104 @@
 
 /* Структура данных — это конкретный способ хранения и организации данных.  */
 
-/* Очередь — список задач, подлежащих обработке. 
-  Каждая задача ассоциируется с некоторой функцией, которая будет вызвана, чтобы обработать эту задачу.
-  Когда стек полностью освобождается, самая первая задача извлекается из очереди и обрабатывается. 
-  Обработка задачи состоит в вызове  ассоциированной с ней функции с параметрами, записанными в этой задаче. 
-  Как обычно, вызов функции создаёт новый контекст выполнения и заносится в стек вызовов.
-  Обработка задачи заканчивается, когда стек снова становится пустым. 
-  Следующая задача извлекается из очереди и начинается её обработка.
+/* Set 
+  Объекты Set позволяют вам сохранять уникальные значения любого типа, как примитивы, так и другие типы объектов.
+  Сохраняет данные в том порядке, в котром добавили.
+  Set итерируемый
+  В Set нет ключей, есть только значения
 
-  Очередь - FIFO (First In First Out). 
-  После добавления нового элемента все элементы, которые были добавлены до этого, должны быть удалены до того, как новый элемент будет удален.
-  В очереди есть только две основные операции: enqueue и dequeue. 
-  Enqueue - вставить элемент в конец очереди.
-  Dequeue - удаление переднего элемента.
- */
+  add - добавить элемент
+  delete -удалить элемент
+  union (Объединение).Объединяет все элементы из двух разных множеств и возвращает результат, как новый набор (без дубликатов).
+  intersection (Пересечение). Если заданы два множества, эта функция вернет другое множество, 
+        содержащее элементы, которые имеются и в первом и во втором множестве.
+  difference  (Разница). Вернет список элементов, которые находятся в одном множестве, но НЕ повторяются в другом.
+  subset(Подмножество) - возвращает булево значение, показывающее, содержит ли одно множество все элементы другого множества.
+  entries - возвращает новый Итератор, который содержит массив [значение, значение] для каждого элемента в объекте Set в порядке их добавления.
+  Итератор - это объект, который предоставляет метод next(), 
+        возвращающий следующий элемент последовательности. Этот метод возвращает объект с двумя свойствами: done и value.
+*/
 
-class Queue {
-  constructor(...elements) {
-    this._tail = 0;
-    this._head = 0;
-    for (let i = 0; i < elements.length; i++) {
-      this.push(elements[i]);
-    }
-  }
+const set = new Set();
+//add
+set.add(1);
+set.add(2);
+set.add("test");
+set.add(true);
+set.add([10, 20, 30]);
+set.add("1");
+set.add(1);
+console.log(set);
+console.log(set.size);
 
-  get size() {
-    return this._tail - this._head;
-  }
+//delete
+set.delete(1);
+set.delete(true);
+console.log(set);
+console.log(set.size);
 
-  /**
-   * Добавление элемента в конец очереди
-   * @param {*} item
-   * @returns {number} размер очереди
-   */
-  push(item) {
-    this[this._tail++] = item;
-    return this.size;
-  }
+//has -есть ли значение
+console.log(set.has(1));
+console.log(set.has("test"));
 
-  /**
-   * Удаление элемента с конца очереди
-   * @returns {any} значение удаленного элемента
-   */
-  pop() {
-    if (this.size > 0) {
-      const deleted = this[this._head];
-      delete this[this._head++];
-      return deleted;
-    }
-  }
+//clear
+set.clear();
+console.log(set);
+console.log(set.size);
+
+//for of
+set.add(1);
+set.add(2);
+set.add("test");
+set.add(true);
+set.add([10, 20, 30]);
+set.add("1");
+set.add(1);
+console.log(set);
+console.log(set.size);
+for (const item of set) {
+  console.log(item);
 }
 
-/**
- * Функция, которая принимает две очереди и возвращает
- * очередь с поочередно вставленными данными из принятых очередей
- * @param {Queue} q1 первая очередь
- * @param {Queue} q2 вторая очередь
- * @returns {Queue} очередь из двух очередей
- */
-function mergeQueue(q1, q2) {
-  const resultQueue = new Queue();
-  // while (q1.size || q2.size) {
-  //   if (q1.size) {
-  //     resultQueue.push(q1.pop());
-  //   }
-  //   if (q2.size) {
-  //     resultQueue.push(q2.pop());
-  //   }
-  // }
+//forEach
+//т.к. нет ключей, value===key
+set.forEach((value, key, set) => {
+  console.log(value);
+  console.log(key);
+  console.log(set);
+});
 
-  for (let i = 0; i !== q1.size + q2.size; ) {
-    if (q1.size) {
-      resultQueue.push(q1.pop());
-    }
-    if (q2.size) {
-      resultQueue.push(q2.pop());
-    }
-  }
+//entries
+const setIter = set.entries();
+console.log(setIter);
+console.log(setIter.next());
+console.log(setIter);
+console.log(setIter.next());
+console.log(setIter);
+console.log(setIter.next());
+console.log(setIter);
+console.log(setIter.next());
+console.log(setIter);
+console.log(setIter.next());
+console.log(setIter);
+console.log(setIter.next());
+console.log(setIter);
+console.log(setIter.next());
 
-  return resultQueue;
+for (const entry of set.values()) {
+  console.log(entry);
 }
 
-const q = new Queue();
-q.push(10);
-q.push(20);
-q.push(30);
-console.log(q);
-q.pop();
-console.log(q);
-console.log(q.size);
-console.log(q);
-const Q = new Queue(100, 200, 300, 400);
-console.log(Q);
+for (const setEntry of set) {
+  console.log(setEntry);
+}
+//==================================================================
 
-const q1 = new Queue(1, 3, 5, 7, 9, 11);
-const q2 = new Queue(2, 4, 6, 8);
-const resultQueue = mergeQueue(q1, q2);
-console.log(resultQueue);
+//Получить массив с уникальными значениями из двух массивов
+const arr1 = [1, 2, 3, 4, 5];
+const arr2 = [3, 4, 7, 8, 9];
+
+const unique = new Set(arr1.concat(arr2));
+const unique1 = [...new Set([...arr1, ...arr2])];
+console.log(unique);
+console.log(unique1);
