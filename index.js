@@ -10,6 +10,7 @@
 //Stack
 /**
  * @param {number} maxSize размер стека
+ * @param {any[]} items  массив элементов, вносимых в стек при создании
  */
 class Stack {
   constructor(maxSize = 10, ...items) {
@@ -20,6 +21,11 @@ class Stack {
     }
   }
 
+  /**
+   * Добавление элемента в стек
+   * @param {*} item добавляемый элемент
+   * @returns {number} размер стека
+   */
   push(item) {
     if (this._size >= this.maxSize) {
       throw new RangeError("Stack overflow");
@@ -29,6 +35,10 @@ class Stack {
     return this._size;
   }
 
+  /**
+   * Удаление элемента из стека
+   * @returns {*} удаленное из стека значение
+   */
   pop() {
     if (this._size === 0) {
       return;
@@ -38,6 +48,10 @@ class Stack {
     return deleted;
   }
 
+  /**
+   * Просмотр последнего значения в стеке
+   * @returns {*} последнее значение в стеке
+   */
   pick() {
     return this[`_${this._size}-1`];
   }
