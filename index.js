@@ -3,104 +3,145 @@
 
 /* Структура данных — это конкретный способ хранения и организации данных.  */
 
-/* Set 
-  Объекты Set позволяют вам сохранять уникальные значения любого типа, как примитивы, так и другие типы объектов.
-  Сохраняет данные в том порядке, в котром добавили.
-  Set итерируемый
-  В Set нет ключей, есть только значения
+/* Map
+Map - структура данных, которая хранит данные в парах ключ / значение, где каждый ключ уникален. 
+Запоминает исходный порядок вставки ключей. 
+Любое значение (как объекты, так и примитивные значения) может использоваться как ключ или значение.
+Map иногда называется ассоциативным массивом или словарем. 
+Часто используется для быстрого поиска данных. 
 
-  add - добавить элемент
-  delete -удалить элемент
-  union (Объединение).Объединяет все элементы из двух разных множеств и возвращает результат, как новый набор (без дубликатов).
-  intersection (Пересечение). Если заданы два множества, эта функция вернет другое множество, 
-        содержащее элементы, которые имеются и в первом и во втором множестве.
-  difference  (Разница). Вернет список элементов, которые находятся в одном множестве, но НЕ повторяются в другом.
-  subset(Подмножество) - возвращает булево значение, показывающее, содержит ли одно множество все элементы другого множества.
-  entries - возвращает новый Итератор, который содержит массив [значение, значение] для каждого элемента в объекте Set в порядке их добавления.
-  Итератор - это объект, который предоставляет метод next(), 
-        возвращающий следующий элемент последовательности. Этот метод возвращает объект с двумя свойствами: done и value.
+new Map() – создаёт коллекцию.
+map.set(key, value) – записывает по ключу key значение value.
+map.get(key) – возвращает значение по ключу или undefined, если ключ key отсутствует.
+map.has(key) – возвращает true, если ключ key присутствует в коллекции, иначе false.
+map.delete(key) – удаляет элемент по ключу key.
+map.clear() – очищает коллекцию от всех элементов.
+map.size – возвращает текущее количество элементов.
+
+Перебор Map
+map.keys() – возвращает итерируемый объект по ключам,
+map.values() – возвращает итерируемый объект по значениям,
+map.entries() – возвращает итерируемый объект по парам вида [ключ, значение], этот вариант используется по умолчанию в for..of.
 */
+const user = {
+  id: 2,
+};
 
-const set = new Set();
-//add
-set.add(1);
-set.add(2);
-set.add("test");
-set.add(true);
-set.add([10, 20, 30]);
-set.add("1");
-set.add(1);
-console.log(set);
-console.log(set.size);
+const obj = {
+  id: 1,
+  name: "Test",
+  lastName: "Test",
+  id: 1000,
+  age: 5,
+  0: false,
+  [user]: "Hello",
+};
 
-//delete
-set.delete(1);
-set.delete(true);
-console.log(set);
-console.log(set.size);
+//кортеж - массив, состоящий из ключа и значения
 
-//has -есть ли значение
-console.log(set.has(1));
-console.log(set.has("test"));
+//создает двумерный массив на основании объекта
+//двумерный массив ключей и значений
+const objEntries = Object.entries(obj);
+console.log(objEntries);
 
-//clear
-set.clear();
-console.log(set);
-console.log(set.size);
+//двумерный массив значений
+const objValues = Object.values(obj);
+console.log(objValues);
 
-//for of
-set.add(1);
-set.add(2);
-set.add("test");
-set.add(true);
-set.add([10, 20, 30]);
-set.add("1");
-set.add(1);
-console.log(set);
-console.log(set.size);
-for (const item of set) {
-  console.log(item);
-}
+//двумерный массив ключей
+const objKeys = Object.keys(obj);
+console.log(objKeys);
 
-//forEach
-//т.к. нет ключей, value===key
-set.forEach((value, key, set) => {
-  console.log(value);
-  console.log(key);
-  console.log(set);
-});
+//длина массива
+const objSize = objEntries.length;
+console.log(objSize);
 
-//entries
-const setIter = set.entries();
-console.log(setIter);
-console.log(setIter.next());
-console.log(setIter);
-console.log(setIter.next());
-console.log(setIter);
-console.log(setIter.next());
-console.log(setIter);
-console.log(setIter.next());
-console.log(setIter);
-console.log(setIter.next());
-console.log(setIter);
-console.log(setIter.next());
-console.log(setIter);
-console.log(setIter.next());
+const map = new Map();
 
-for (const entry of set.values()) {
-  console.log(entry);
-}
+const arr = [1, 34, 5];
 
-for (const setEntry of set) {
-  console.log(setEntry);
-}
+const func = () => {};
+
+map.set("id", 1);
+map.set(arr, "array");
+map.set(func, "function");
+map.set(1, 1);
+map.set("1", "number one");
+map.set(user, "object");
+console.log(map);
+
+const value = map.get(user);
+console.log(value);
+map.delete(user);
+console.log(map);
 //==================================================================
 
-//Получить массив с уникальными значениями из двух массивов
-const arr1 = [1, 2, 3, 4, 5];
-const arr2 = [3, 4, 7, 8, 9];
+//Словарь
+const vocabulary = new Map([
+  ["получить", "obtain"],
+  ["преимущество", "advantage"],
+  ["стул", "chair"],
+  ["наличка", "cash"],
+  ["цифробуквенный", "alphanumerical"],
+  ["переговоры", "negotiacions"],
+  ["значительный", "significant"],
+  ["кот", "cat"],
+  ["собака", "dog"],
+  ["слон", "elephant"],
+  ["язык", "language"],
+]);
 
-const unique = new Set(arr1.concat(arr2));
-const unique1 = [...new Set([...arr1, ...arr2])];
-console.log(unique);
-console.log(unique1);
+const stringToTranslate =
+  "слон значительный получить наличку собака кот цифробуквенный стул";
+
+function translate(str) {
+  const arrFromStr = str.split(" ");
+  for (let i = 0; i < arrFromStr.length; i++) {
+    arrFromStr[i] = vocabulary.get(arrFromStr[i]);
+  }
+  arrFromStr.join(" ");
+  return arrFromStr;
+}
+console.log(translate(stringToTranslate));
+
+//refactoring
+function translate_(str) {
+  return str
+    .split(" ")
+    .map((element) =>
+      vocabulary.has(element) ? vocabulary.get(element) : element
+    )
+    .join(" ");
+}
+console.log(translate_(stringToTranslate));
+//==================================================================
+const u1 = {
+  id: 1,
+  name: "John",
+  age: 20,
+};
+const u2 = {
+  id: 2,
+  name: "Jane",
+  age: 23,
+};
+const johnMsg = ["Hello", "yes", "no", "test"];
+const janeMsg = ["Hi", "abracadabra?", "test", "not test"];
+
+const msgToUser = new Map();
+
+msgToUser.set(u1, johnMsg);
+msgToUser.set(u2, janeMsg);
+
+function getUserMessege(user) {
+  return msgToUser.get(user);
+}
+console.log(getUserMessege(u1));
+
+msgToUser.set(u1.id, johnMsg);
+msgToUser.set(u2.id, janeMsg);
+
+function getUserMessege_({ id }) {
+  return msgToUser.get(id);
+}
+console.log(getUserMessege_({id:2}));
